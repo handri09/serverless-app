@@ -2,12 +2,11 @@ import 'source-map-support/register';
 import { createLogger } from '../../utils/logger';
 import * as middy from 'middy';
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
-import { createAttachmentPresignedUrl, updateTodoUrl } from '../../helpers/todos';
-import { getUploadUrl } from '../../helpers/attachmentUtils';
+import { createAttachmentPresignedUrl } from '../../helpers/todos';
+import { getUploadUrl, updateTodoUrl } from '../../helpers/attachmentUtils';
 import { getUserId } from '../utils';
 
 const logger = createLogger('generateUploadUrl');
-const bucketName = process.env.ATTACHMENT_S3_BUCKET;
 
 export const handler = middy(
   async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
@@ -20,10 +19,8 @@ export const handler = middy(
 
     const uploadUrl = getUploadUrl(todoId)
     const userId = getUserId(event);
-    const updatedTodo = {
-      attachmentUrl: `https://${bucketName}.s3.amazonaws.com/${todoId}`
-    }
-    await updateTodoUrl(updatedTodo, userId, todoId)
+
+    await updateTodoUrl( userId, todoId)
 
     const url = await createAttachmentPresignedUrl(todoId, jwtToken);
 

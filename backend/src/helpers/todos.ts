@@ -50,11 +50,3 @@ export function deleteTodo(todoId: string, jwtToken: string): Promise<string> {
   const userId = parseUserId(jwtToken);
   return todoAccess.deleteToDo(todoId, userId);
 }
-
-export async function updateTodoUrl(updateTodo, userId: string, todoId: string): Promise<TodoItem>{
-  return await todoAccess.updateTodoUrl({
-      userId,
-      todoId,
-      attachmentUrl: updateTodo.attachmentUrl,
-  })
-}
