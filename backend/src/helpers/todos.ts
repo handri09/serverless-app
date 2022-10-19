@@ -30,7 +30,7 @@ export async function buildTodo(createTodoRequest: CreateTodoRequest, userId: st
       logger.info(`buildTodo results: ${result}`)
       return result
   } catch (e) {
-      logger.error(`Failed in creating Todo: `, e.message)
+      logger.error(`Failed in creating Todo: `, e)
       return null
   }
 }

@@ -91,6 +91,7 @@ functions:
           path: todos
           cors: true
           authorizer: Auth
+          reqValidatorName: RequestBodyValidator
     iamRoleStatementsName: udagramapp-get-todo-role-${self:provider.stage}
     iamRoleStatements:
       - Effect: Allow
@@ -111,15 +112,10 @@ functions:
           method: post
           path: todos
           cors: true
-          authorizer: Auth
+          authorizer: Auth   
           request:
             schemas:
               application/json: ${file(models/create-todo-model.json)}
-          documentation:
-            summary: "Create a new todo item"
-            description: "Create a new todo item"
-            requestModels:
-              "application/json": CreateTodoRequest
           reqValidatorName: RequestBodyValidator
     iamRoleStatementsName: udagramapp-create-todo-role-${self:provider.stage}
     iamRoleStatements:
@@ -142,11 +138,9 @@ functions:
           path: todos/{todoId}
           cors: true
           authorizer: Auth
-          documentation:
-            summary: "Update a todo item"
-            description: "Update a todo item"
-            requestModels:
-              "application/json": UpdateTodoRequest
+          request:
+            schemas:
+              application/json: ${file(models/update-todo-model.json)}
           reqValidatorName: RequestBodyValidator
     iamRoleStatementsName: udagramapp-update-todo-role-${self:provider.stage}
     iamRoleStatements:
@@ -172,6 +166,7 @@ functions:
           path: todos/{todoId}
           cors: true
           authorizer: Auth
+          reqValidatorName: RequestBodyValidator
     iamRoleStatementsName: udagramapp-delete-todo-role-${self:provider.stage}
     iamRoleStatements:
       - Effect: Allow
@@ -192,8 +187,8 @@ functions:
           method: post
           path: todos/{todoId}/attachment
           cors: true
-          origin: '*' 
           authorizer: Auth
+          reqValidatorName: RequestBodyValidator
     iamRoleStatementsName: udagramapp-s3-upload-role-${self:provider.stage}
     iamRoleStatements:
       - Effect: Allow
