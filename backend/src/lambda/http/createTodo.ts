@@ -9,7 +9,7 @@ import { buildTodo } from '../../helpers/todos'
 export const handler = middy(
   async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     const newTodo: CreateTodoRequest = JSON.parse(event.body)
-    if (!newTodo.name) {
+    if (!newTodo.name || !newTodo.name.trim()) {
       throw new Error(`Invalid Todo Name`)
     }
     // TODO: Implement creating a new TODO item

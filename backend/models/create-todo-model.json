@@ -3,15 +3,17 @@
   "title": "createTodo",
   "type": "object",
   "properties": {
-    "name": { "$ref": "#/definitions/non-empty-string" },
-    "dueDate": { "$ref": "#/definitions/non-empty-string" }
-  },
-  "anyOf": [{ "required": ["name"] }, { "required": ["dueDate"] }],
-  "definitions": {
-    "non-empty-string": {
+    "name": {
       "type": "string",
       "minLength": 1
+    },
+    "dueDate": {
+      "type": "string"
     }
   },
+  "required": [
+    "name",
+    "dueDate"
+  ],
   "additionalProperties": false
 }
