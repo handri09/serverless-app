@@ -38,8 +38,10 @@ You might also store an id of a user who created a TODO item.
    # Configure serverless to use the AWS credentials to deploy the application
    # You need to have a pair of Access key (YOUR_ACCESS_KEY_ID and YOUR_SECRET_KEY) of an IAM user with Admin access permissions
    sls config credentials --provider aws --key YOUR_ACCESS_KEY_ID --secret YOUR_SECRET_KEY --profile serverless
-   ```
-   
+   ```   
+* in Package.json, change to "typescript": "~4.6.4",
+* in Package.json, change to "@types/node": "~10.7.0",
+
 # Functions to be implemented
 
 To implement this project, you need to implement the following functions and configure them in the `serverless.yml` file:
